@@ -511,6 +511,7 @@ function findLongestIncreasingSubsequence(nums) {
     }
     return curr;
   });
+  return maxLen;
 }
 
 /**
@@ -527,8 +528,8 @@ function findLongestIncreasingSubsequence(nums) {
  *  propagateItemsByPositionIndex([ 'a', 'b', 'c', null ]) => [ 'a', 'b', 'b', 'c', 'c', 'c',  null, null, null, null ]
  *  propagateItemsByPositionIndex([ 1,2,3,4,5 ]) => [ 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
+function propagateItemsByPositionIndex(arr) {
+  return arr.reduce((acc, el, i) => acc.concat(Array(i + 1).fill(el)), []);
 }
 
 /**
@@ -544,10 +545,12 @@ function propagateItemsByPositionIndex(/* arr */) {
  *    shiftArray(['a', 'b', 'c', 'd'], -1) => ['b', 'c', 'd', 'a']
  *    shiftArray([10, 20, 30, 40, 50], -3) => [40, 50, 10, 20, 30]
  */
-function shiftArray(/* arr, n */) {
-  throw new Error('Not implemented');
+function shiftArray(arr, n) {
+  if (n > 0) {
+    return arr.slice(arr.length - n).concat(arr.slice(0, arr.length - n));
+  }
+  return arr.slice(-n).concat(arr.slice(0, -n));
 }
-
 /**
  * Sorts digit names.
  *
@@ -561,8 +564,20 @@ function shiftArray(/* arr, n */) {
  *   sortDigitNamesByNumericOrder([ 'nine','eight','nine','eight' ]) => [ 'eight','eight','nine','nine']
  *   sortDigitNamesByNumericOrder([ 'one','one','one','zero' ]) => [ 'zero','one','one','one' ]
  */
-function sortDigitNamesByNumericOrder(/* arr */) {
-  throw new Error('Not implemented');
+function sortDigitNamesByNumericOrder(arr) {
+  const digitNames = [
+    'zero',
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
+  ];
+  return arr.sort((a, b) => digitNames.indexOf(a) - digitNames.indexOf(b));
 }
 
 /**
@@ -584,8 +599,11 @@ function sortDigitNamesByNumericOrder(/* arr */) {
  *   swapHeadAndTail([]) => []
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  const middle = Math.floor(arr.length / 2);
+  return arr
+    .slice(-middle)
+    .concat(arr.slice(middle, -middle), arr.slice(0, middle));
 }
 
 module.exports = {
